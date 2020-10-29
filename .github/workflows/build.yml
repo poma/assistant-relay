@@ -15,13 +15,19 @@ jobs:
         with:
           node-version: 12
 
-#      - name: Build client
-#        run: |
-#          cd client
-#          npm ci
-#          npm run build
-#        env:
-#          CI: false # code contains lots of warnings, avoid treating them as errors by unsetting CI flag
+      - name: Build client
+        run: |
+          cd client
+          npm ci
+          npm run build
+        env:
+          CI: false # code contains lots of warnings, avoid treating them as errors by unsetting CI flag
+
+      - name: Upload artefact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: build
+          path: build
 
   release:
     runs-on: ubuntu-latest
@@ -34,13 +40,10 @@ jobs:
         with:
           node-version: 12
 
-      - name: Build client
-        run: |
-          cd client
-          npm ci
-          npm run build
-        env:
-          CI: false # code contains lots of warnings, avoid treating them as errors by unsetting CI flag
+      - name: Download build artifact
+          uses: actions/download-artifact@v1
+          with:
+            name: build
 
       - name: Assemble release
         run: |
