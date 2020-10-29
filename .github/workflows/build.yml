@@ -6,7 +6,7 @@ on:
     branches: ['*']
 
 jobs:
-  lint:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,12 +20,14 @@ jobs:
           cd client
           npm ci
           npm run build
+        env:
+          CI: false # code contains lots of warnings, avoid treating them as errors by unsetting CI flag
 
       - name: Assemble release
-        run: npm i fs-extra && node release.js
-
-      - name: Create release archive
-        run: zip release
+        run: |
+          npm i fs-extra
+          node release.js
+          zip release
 
       - name: Set version var
         id: vars
