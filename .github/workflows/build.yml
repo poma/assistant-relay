@@ -27,7 +27,7 @@ jobs:
         run: |
           npm i fs-extra
           node release.js
-          zip release
+          zip -vr release.zip release/
 
       - name: Set version var
         id: vars
