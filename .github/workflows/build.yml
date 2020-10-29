@@ -41,9 +41,9 @@ jobs:
           node-version: 12
 
       - name: Download build artifact
-          uses: actions/download-artifact@v1
-          with:
-            name: build
+        uses: actions/download-artifact@v1
+        with:
+          name: build
 
       - name: Assemble release
         run: |
