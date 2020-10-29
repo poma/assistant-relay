@@ -23,11 +23,11 @@ jobs:
         env:
           CI: false # code contains lots of warnings, avoid treating them as errors by unsetting CI flag
 
-      - name: Upload artefact
+      - name: Upload build artefact
         uses: actions/upload-artifact@v1.0.0
         with:
           name: build
-          path: build
+          path: client/build
 
   release:
     runs-on: ubuntu-latest
